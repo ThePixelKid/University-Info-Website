@@ -95,3 +95,20 @@ footer {
   font-size: 0.9rem;
   color: #aaa;
 }
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  background: #181818;
+  color: #fff;
+}
+.compare-table th, .compare-table td {
+  border: 1px solid #222;
+  padding: 1rem;
+  text-align: center;
+}
+.compare-table th {
+  background: #222;
+  font-weight: 600;
+}
