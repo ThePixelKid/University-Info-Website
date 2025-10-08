@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: #fff;
-  background: #000;
+  background: linear-gradient(120deg, #181818 0%, #232a3b 100%);
   line-height: 1.6;
 }
 
@@ -13,18 +13,29 @@ a:hover { text-decoration: underline; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #eee;
+  padding: 1.5rem 3rem;
+  border-bottom: none;
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #181818;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: rgba(24,24,24,0.98);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  border-radius: 0 0 24px 24px;
 }
 
 .navbar a {
-  margin-left: 1rem;
-  font-weight: 500;
+  margin-left: 2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s;
+}
+.navbar a.active, .navbar a:hover {
+  background: linear-gradient(90deg, #0070c9 0%, #00ffe7 100%);
+  color: #181818;
 }
 
 .hero {
@@ -123,11 +134,23 @@ footer {
   font-weight: 600;
 }
 
+.compare-hero {
+  width: 100%;
+  padding: 4rem 2rem 2rem 2rem;
+  background: linear-gradient(120deg, #232a3b 0%, #181818 100%);
+  border-radius: 0 0 32px 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
 .compare-section {
-  max-width: 1100px;
-  margin: 3rem auto;
-  padding: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto 3rem auto;
+  padding: 2rem 1rem;
   animation: fadeIn 1s ease;
+  background: rgba(24,24,24,0.98);
+  border-radius: 32px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
 }
 .compare-title {
   text-align: center;
@@ -138,77 +161,92 @@ footer {
 .compare-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 0.5rem;
-  background: #181818;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  gap: 1.5rem;
+  background: transparent;
+  border-radius: 24px;
+  overflow: visible;
+  box-shadow: none;
 }
 .compare-feature {
-  background: #222;
+  background: linear-gradient(90deg, #232a3b 0%, #181818 100%);
   color: #fff;
-  font-weight: 600;
-  padding: 1.5rem 1rem;
-  border-bottom: 1px solid #333;
+  font-weight: 700;
+  padding: 2rem 1rem 2rem 1rem;
+  border-radius: 18px;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
-  font-size: 1.1rem;
-  transition: opacity 0.7s;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  transition: opacity 0.7s, box-shadow 0.3s;
 }
 .compare-feature:hover {
-  opacity: 0.2;
+  opacity: 0.7;
+  box-shadow: 0 4px 24px #0070c9;
 }
 .compare-university {
-  background: #222;
+  background: linear-gradient(120deg, #232a3b 0%, #181818 100%);
   color: #fff;
   text-align: center;
-  padding: 1.5rem 1rem 1rem 1rem;
-  border-bottom: 1px solid #333;
-  transition: opacity 0.7s;
+  padding: 2rem 1rem 1.5rem 1rem;
+  border-radius: 18px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  transition: opacity 0.7s, box-shadow 0.3s;
+}
+.compare-university h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
 }
 .compare-university h2:hover {
-  opacity: 0.2;
+  opacity: 0.7;
 }
 .compare-logo {
-  width: 80px;
-  height: 80px;
-  max-width: 80px;
-  max-height: 80px;
+  width: 90px;
+  height: 90px;
+  max-width: 90px;
+  max-height: 90px;
   object-fit: contain;
   background: #fff;
-  border-radius: 16px;
-  padding: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 18px;
+  padding: 10px;
+  box-shadow: 0 4px 16px rgba(0,112,201,0.12);
   display: block;
   margin: 0 auto 0.5rem auto;
   transition: transform 0.3s, box-shadow 0.3s;
   animation: pulse 2s infinite;
 }
 .compare-logo:hover {
-  transform: scale(1.15) rotate(-5deg);
-  box-shadow: 0 4px 24px #0070c9;
+  transform: scale(1.18) rotate(-5deg);
+  box-shadow: 0 8px 32px #00ffe7;
 }
 .compare-value {
-  background: #181818;
+  background: linear-gradient(90deg, #232a3b 0%, #181818 100%);
   color: #fff;
   text-align: center;
-  padding: 1.5rem 1rem;
-  font-size: 1.05rem;
-  border-bottom: 1px solid #222;
+  padding: 2rem 1rem;
+  font-size: 1.15rem;
+  border-radius: 18px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.5s, color 0.5s;
+  transition: background 0.5s, color 0.5s, box-shadow 0.3s;
 }
 .compare-value:hover {
-  background: #0070c9;
-  color: #fff;
+  background: linear-gradient(90deg, #0070c9 0%, #00ffe7 100%);
+  color: #181818;
+  box-shadow: 0 4px 24px #00ffe7;
 }
 .compare-links {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   animation: fadeIn 1.5s ease;
 }
 
