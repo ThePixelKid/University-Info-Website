@@ -151,11 +151,13 @@ footer {
   border-bottom: 1px solid #333;
 }
 .compare-logo {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
   margin-bottom: 0.5rem;
   border-radius: 12px;
   background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 .compare-value {
   background: #181818;
