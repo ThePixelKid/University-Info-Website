@@ -34,8 +34,107 @@
     </div>
   </section>
 
+  <!-- Side-by-side comparison for two universities -->
+  <section class="compare-two" style="max-width:1000px;margin:3rem auto;padding:2rem;background:rgba(24,24,24,0.98);border-radius:20px;">
+    <h2 style="text-align:center;margin-bottom:1rem;">Compare Two Universities</h2>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;">
+      <label style="color:#aaa;display:flex;flex-direction:column;align-items:flex-start;">
+        University A:
+        <select id="compare-a" style="margin-top:0.5rem;padding:0.5rem 0.75rem;border-radius:8px;background:#181818;color:#fff;border:1px solid #222;">
+          <option value="kennesaw">Kennesaw State University</option>
+          <option value="gsu">Georgia State University</option>
+          <option value="gatech">Georgia Tech</option>
+        </select>
+      </label>
+      <label style="color:#aaa;display:flex;flex-direction:column;align-items:flex-start;">
+        University B:
+        <select id="compare-b" style="margin-top:0.5rem;padding:0.5rem 0.75rem;border-radius:8px;background:#181818;color:#fff;border:1px solid #222;">
+          <option value="gsu">Georgia State University</option>
+          <option value="kennesaw">Kennesaw State University</option>
+          <option value="gatech">Georgia Tech</option>
+        </select>
+      </label>
+    </div>
+
+    <table class="compare-table" id="compare-table" aria-label="Side by side university comparison">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th id="col-a">University A</th>
+          <th id="col-b">University B</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Location</td><td id="loc-a"></td><td id="loc-b"></td></tr>
+        <tr><td>Enrollment</td><td id="enr-a"></td><td id="enr-b"></td></tr>
+        <tr><td>In-state Tuition</td><td id="in-a"></td><td id="in-b"></td></tr>
+        <tr><td>Out-of-state Tuition</td><td id="out-a"></td><td id="out-b"></td></tr>
+        <tr><td>Acceptance Rate</td><td id="acc-a"></td><td id="acc-b"></td></tr>
+        <tr><td>Pros</td><td id="pros-a"></td><td id="pros-b"></td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <footer>
     <p>© 2025 My University Choices</p>
   </footer>
+  <script>
+    // Small data set for universities
+    const universities = {
+      kennesaw: {
+        name: 'Kennesaw State University',
+        location: 'Kennesaw & Marietta, Georgia, USA',
+        enrollment: '~47,845',
+        in: '$7,548',
+        out: '$21,616',
+        acceptance: 'N/A',
+        pros: 'Close to Atlanta; diverse programs; growing research profile.'
+      },
+      gsu: {
+        name: 'Georgia State University',
+        location: 'Atlanta, Georgia, USA',
+        enrollment: '~52,000',
+        in: '$12,500',
+        out: '$33,320',
+        acceptance: 'Varies',
+        pros: 'Diverse student body; urban setting; strong academic reputation.'
+      },
+      gatech: {
+        name: 'Georgia Tech',
+        location: 'Atlanta, Georgia, USA',
+        enrollment: '~43,000',
+        in: '$10,512',
+        out: '$33,596',
+        acceptance: '~12–15%',
+        pros: 'World-class STEM reputation; strong alumni network; Atlanta industry links.'
+      }
+    };
+
+    function updateCompare() {
+      const aKey = document.getElementById('compare-a').value;
+      const bKey = document.getElementById('compare-b').value;
+      const a = universities[aKey];
+      const b = universities[bKey];
+      document.getElementById('col-a').textContent = a.name;
+      document.getElementById('col-b').textContent = b.name;
+      document.getElementById('loc-a').textContent = a.location;
+      document.getElementById('loc-b').textContent = b.location;
+      document.getElementById('enr-a').textContent = a.enrollment;
+      document.getElementById('enr-b').textContent = b.enrollment;
+      document.getElementById('in-a').textContent = a.in;
+      document.getElementById('in-b').textContent = b.in;
+      document.getElementById('out-a').textContent = a.out;
+      document.getElementById('out-b').textContent = b.out;
+      document.getElementById('acc-a').textContent = a.acceptance;
+      document.getElementById('acc-b').textContent = b.acceptance;
+      document.getElementById('pros-a').textContent = a.pros;
+      document.getElementById('pros-b').textContent = b.pros;
+    }
+
+    document.getElementById('compare-a').addEventListener('change', updateCompare);
+    document.getElementById('compare-b').addEventListener('change', updateCompare);
+    // initialize
+    updateCompare();
+  </script>
 </body>
 </html>
