@@ -26,40 +26,62 @@ document.addEventListener('DOMContentLoaded', function () {
     update();
   });
 
-  // Comparison Filters (improved logic)
-  const uniFilter = document.getElementById('uni-filter');
-  const statFilter = document.getElementById('stat-filter');
-  const grid = document.getElementById('compare-grid');
-  function filterGrid() {
-    const selectedUnis = Array.from(uniFilter.selectedOptions).map(o => o.value);
-    const selectedStat = statFilter.value;
-    // Show/hide university columns
-    grid.querySelectorAll('.compare-university').forEach((el, i) => {
-      el.style.display = selectedUnis.includes(['ksu','gsu','gt'][i]) ? '' : 'none';
-    });
-    // Show/hide stat rows and corresponding values
-    let statIndex = 0;
-    grid.querySelectorAll('.compare-feature').forEach((el, i) => {
-      const statName = el.textContent.replace(/\s/g,'').toLowerCase();
-      const showStat = selectedStat === 'all' || statName.includes(selectedStat.replace(/-/g,''));
-      el.style.display = showStat ? '' : 'none';
-      // Show/hide corresponding values
-      let valueEls = [];
-      let idx = el.nextElementSibling;
-      for (let j = 0; j < 3; j++) {
-        if (idx && idx.classList.contains('compare-value')) {
-          valueEls.push(idx);
-          idx = idx.nextElementSibling;
-        }
-      }
-      valueEls.forEach((valueEl, colIdx) => {
-        valueEl.style.display = showStat && selectedUnis.includes(['ksu','gsu','gt'][colIdx]) ? '' : 'none';
-      });
-    });
+  // Side-by-side comparison logic for new table UI
+  const universities = {
+    kennesaw: {
+      name: 'Kennesaw State University',
+      location: 'Kennesaw & Marietta, Georgia, USA',
+      enrollment: '~47,845',
+      in: '$7,548',
+      out: '$21,616',
+      acceptance: 'N/A',
+      pros: 'Close to Atlanta; diverse programs; growing research profile.'
+    },
+    gsu: {
+      name: 'Georgia State University',
+      location: 'Atlanta, Georgia, USA',
+      enrollment: '~52,000',
+      in: '$12,500',
+      out: '$33,320',
+      acceptance: 'Varies',
+      pros: 'Diverse student body; urban setting; strong academic reputation.'
+    },
+    gatech: {
+      name: 'Georgia Tech',
+      location: 'Atlanta, Georgia, USA',
+      enrollment: '~43,000',
+      in: '$10,512',
+      out: '$33,596',
+      acceptance: '~12–15%',
+      pros: 'World-class STEM reputation; strong alumni network; Atlanta industry links.'
+    }
+  };
+
+  function updateCompare() {
+    const aKey = document.getElementById('compare-a').value;
+    const bKey = document.getElementById('compare-b').value;
+    const a = universities[aKey];
+    const b = universities[bKey];
+    document.getElementById('col-a').textContent = a.name;
+    document.getElementById('col-b').textContent = b.name;
+    document.getElementById('loc-a').textContent = a.location;
+    document.getElementById('loc-b').textContent = b.location;
+    document.getElementById('enr-a').textContent = a.enrollment;
+    document.getElementById('enr-b').textContent = b.enrollment;
+    document.getElementById('in-a').textContent = a.in;
+    document.getElementById('in-b').textContent = b.in;
+    document.getElementById('out-a').textContent = a.out;
+    document.getElementById('out-b').textContent = b.out;
+    document.getElementById('acc-a').textContent = a.acceptance;
+    document.getElementById('acc-b').textContent = b.acceptance;
+    document.getElementById('pros-a').textContent = a.pros;
+    document.getElementById('pros-b').textContent = b.pros;
   }
-  uniFilter.addEventListener('change', filterGrid);
-  statFilter.addEventListener('change', filterGrid);
-  filterGrid();
+
+  document.getElementById('compare-a').addEventListener('change', updateCompare);
+  document.getElementById('compare-b').addEventListener('change', updateCompare);
+  // initialize
+  updateCompare();
 
   // Page Transitions
   document.querySelectorAll('a').forEach(function (a) {

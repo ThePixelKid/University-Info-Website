@@ -17,72 +17,46 @@
       <button id="mode-toggle" aria-label="Toggle dark/light mode" style="margin-left:2rem;">🌙</button>
     </header>
 
-    <section class="compare-hero">
-      <h1 class="compare-title" style="font-size:3rem;font-weight:800;letter-spacing:1px;line-height:1.1;margin-bottom:1.5rem;">Compare Universities</h1>
-      <p class="compare-subtitle" style="font-size:1.3rem;max-width:600px;margin:0 auto 2.5rem auto;color:#aaa;text-align:center;">Find the best fit for you by comparing tuition, enrollment, location, and more. Select your universities and stats below.</p>
-    </section>
 
-    <section class="compare-section fade-transition">
-      <div class="compare-filters">
-        <label for="uni-filter">Universities:</label>
-        <select id="uni-filter" multiple aria-label="Select universities to compare">
-          <option value="ksu" selected>Kennesaw State</option>
-          <option value="gsu" selected>Georgia State</option>
-          <option value="gt" selected>Georgia Tech</option>
-        </select>
-        <label for="stat-filter">Statistic:</label>
-        <select id="stat-filter" aria-label="Select statistic to compare">
-          <option value="all" selected>All</option>
-          <option value="enrollment">Enrollment</option>
-          <option value="tuition-in">In-State Tuition</option>
-          <option value="tuition-out">Out-of-State Tuition</option>
-          <option value="acceptance">Acceptance Rate</option>
-          <option value="location">Campus Location</option>
-        </select>
+    <section class="compare-section fade-transition" style="background:rgba(24,24,24,0.98);border-radius:32px;box-shadow:0 4px 32px rgba(0,0,0,0.18);margin-top:2rem;">
+      <h2 style="text-align:center;margin-bottom:1rem;">Compare Two Universities</h2>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;">
+        <label style="color:#aaa;display:flex;flex-direction:column;align-items:flex-start;">
+          University A:
+          <select id="compare-a" style="margin-top:0.5rem;padding:0.5rem 0.75rem;border-radius:8px;background:#181818;color:#fff;border:1px solid #222;">
+            <option value="kennesaw">Kennesaw State University</option>
+            <option value="gsu">Georgia State University</option>
+            <option value="gatech">Georgia Tech</option>
+          </select>
+        </label>
+        <label style="color:#aaa;display:flex;flex-direction:column;align-items:flex-start;">
+          University B:
+          <select id="compare-b" style="margin-top:0.5rem;padding:0.5rem 0.75rem;border-radius:8px;background:#181818;color:#fff;border:1px solid #222;">
+            <option value="gsu">Georgia State University</option>
+            <option value="kennesaw">Kennesaw State University</option>
+            <option value="gatech">Georgia Tech</option>
+          </select>
+        </label>
       </div>
-      <div class="compare-grid" id="compare-grid">
-        <div class="compare-feature"></div>
-        <div class="compare-university" data-tooltip="Kennesaw State University" aria-label="Kennesaw State">
-            <a href="https://www.kennesaw.edu/" target="_blank" aria-label="Kennesaw State Official Site">
-            <img src="img/kennesaw.png" alt="Kennesaw State University logo" class="compare-logo" loading="lazy" />
-            </a>
-            <h2 tabindex="0">Kennesaw State</h2>
-        </div>
-        <div class="compare-university" data-tooltip="Georgia State University" aria-label="Georgia State">
-            <a href="https://www.gsu.edu/" target="_blank" aria-label="Georgia State Official Site">
-            <img src="img/gsu.png" alt="Georgia State University logo" class="compare-logo" loading="lazy" />
-            </a>
-            <h2 tabindex="0">Georgia State</h2>
-        </div>
-        <div class="compare-university" data-tooltip="Georgia Tech" aria-label="Georgia Tech">
-            <a href="https://www.gatech.edu/" target="_blank" aria-label="Georgia Tech Official Site">
-            <img src="img/gatech.png" alt="Georgia Tech logo" class="compare-logo" loading="lazy" />
-            </a>
-            <h2 tabindex="0">Georgia Tech</h2>
-        </div>
-        <!-- Features -->
-        <div class="compare-feature" data-tooltip="Total student enrollment">Enrollment</div>
-        <div class="compare-value animated-counter" data-value="47845">~47,845</div>
-        <div class="compare-value animated-counter" data-value="52000">~52,000</div>
-        <div class="compare-value animated-counter" data-value="43000">~43,000</div>
-        <div class="compare-feature" data-tooltip="Annual in-state tuition">In-State Tuition</div>
-        <div class="compare-value" data-value="7548">$7,548</div>
-        <div class="compare-value" data-value="12500">$12,500</div>
-        <div class="compare-value best-value" data-value="10512">$10,512</div>
-        <div class="compare-feature" data-tooltip="Annual out-of-state tuition">Out-of-State Tuition</div>
-        <div class="compare-value best-value" data-value="21616">$21,616</div>
-        <div class="compare-value" data-value="33320">$33,320</div>
-        <div class="compare-value" data-value="33596">$33,596</div>
-        <div class="compare-feature" data-tooltip="Percentage of applicants admitted">Acceptance Rate</div>
-        <div class="compare-value" data-value="0">N/A</div>
-        <div class="compare-value" data-value="0">N/A</div>
-        <div class="compare-value best-value" data-value="15">12–15%</div>
-        <div class="compare-feature" data-tooltip="Campus location(s)">Campus Location</div>
-        <div class="compare-value" data-value="kennesaw">Kennesaw & Marietta</div>
-        <div class="compare-value best-value" data-value="atlanta">Atlanta</div>
-        <div class="compare-value best-value" data-value="atlanta">Atlanta</div>
-      </div>
-      <div class="compare-links">
+
+      <table class="compare-table" id="compare-table" aria-label="Side by side university comparison">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th id="col-a">University A</th>
+            <th id="col-b">University B</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Location</td><td id="loc-a"></td><td id="loc-b"></td></tr>
+          <tr><td>Enrollment</td><td id="enr-a"></td><td id="enr-b"></td></tr>
+          <tr><td>In-state Tuition</td><td id="in-a"></td><td id="in-b"></td></tr>
+          <tr><td>Out-of-state Tuition</td><td id="out-a"></td><td id="out-b"></td></tr>
+          <tr><td>Acceptance Rate</td><td id="acc-a"></td><td id="acc-b"></td></tr>
+          <tr><td>Pros</td><td id="pros-a"></td><td id="pros-b"></td></tr>
+        </tbody>
+      </table>
+      <div class="compare-links" style="margin-top:2rem;">
         <a href="kennesaw.html" class="btn">Kennesaw State Details</a>
         <a href="gsu.html" class="btn">Georgia State Details</a>
         <a href="gatech.html" class="btn">Georgia Tech Details</a>
