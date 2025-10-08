@@ -15,6 +15,11 @@ a:hover { text-decoration: underline; }
   align-items: center;
   padding: 1rem 2rem;
   border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #181818;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .navbar a {
@@ -40,6 +45,11 @@ a:hover { text-decoration: underline; }
   color: white;
   border-radius: 10px;
   margin-top: 1rem;
+  transition: background 0.3s, transform 0.3s;
+}
+.btn:hover {
+  background: #005fa3;
+  transform: scale(1.08);
 }
 
 .modules {
@@ -117,6 +127,7 @@ footer {
   max-width: 1100px;
   margin: 3rem auto;
   padding: 2rem;
+  animation: fadeIn 1s ease;
 }
 .compare-title {
   text-align: center;
@@ -142,6 +153,10 @@ footer {
   display: flex;
   align-items: center;
   font-size: 1.1rem;
+  transition: opacity 0.7s;
+}
+.compare-feature:hover {
+  opacity: 0.2;
 }
 .compare-university {
   background: #222;
@@ -149,15 +164,29 @@ footer {
   text-align: center;
   padding: 1.5rem 1rem 1rem 1rem;
   border-bottom: 1px solid #333;
+  transition: opacity 0.7s;
+}
+.compare-university h2:hover {
+  opacity: 0.2;
 }
 .compare-logo {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
+  max-width: 80px;
+  max-height: 80px;
   object-fit: contain;
-  margin-bottom: 0.5rem;
-  border-radius: 12px;
   background: #fff;
+  border-radius: 16px;
+  padding: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: block;
+  margin: 0 auto 0.5rem auto;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: pulse 2s infinite;
+}
+.compare-logo:hover {
+  transform: scale(1.15) rotate(-5deg);
+  box-shadow: 0 4px 24px #0070c9;
 }
 .compare-value {
   background: #181818;
@@ -169,19 +198,138 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.5s, color 0.5s;
+}
+.compare-value:hover {
+  background: #0070c9;
+  color: #fff;
 }
 .compare-links {
   display: flex;
   justify-content: center;
   gap: 2rem;
   margin-top: 2rem;
+  animation: fadeIn 1.5s ease;
 }
+
+/* Sticky Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #181818;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Dark/Light Mode */
+body.light-mode {
+  background: #fff;
+  color: #222;
+}
+body.light-mode .navbar,
+body.light-mode .compare-section,
+body.light-mode .card,
+body.light-mode .module,
+body.light-mode .info-block {
+  background: #f7f7f7;
+  color: #222;
+}
+body.light-mode .compare-feature,
+body.light-mode .compare-university {
+  background: #eaeaea;
+  color: #222;
+}
+body.light-mode .compare-value {
+  background: #fff;
+  color: #222;
+}
+body.light-mode .btn {
+  background: #0070c9;
+  color: #fff;
+}
+body.light-mode .btn:hover {
+  background: #005fa3;
+}
+
+/* Tooltip Styles */
+[data-tooltip] {
+  position: relative;
+  cursor: pointer;
+}
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  top: 110%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  white-space: nowrap;
+  font-size: 0.95em;
+  z-index: 10;
+  opacity: 0.95;
+  pointer-events: none;
+}
+body.light-mode [data-tooltip]:hover::after {
+  background: #0070c9;
+  color: #fff;
+}
+
+/* Highlight Best Value */
+.best-value {
+  border: 2px solid #0070c9;
+  box-shadow: 0 0 8px #0070c9;
+  position: relative;
+}
+.best-value::before {
+  content: '★';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  color: #0070c9;
+  font-size: 1.2em;
+}
+
+/* Animated Counter */
+.animated-counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Page Transitions */
+.fade-transition {
+  transition: opacity 0.6s;
+}
+.fade-exit {
+  opacity: 0;
+}
+.fade-enter {
+  opacity: 1;
+}
+
+/* Comparison Filters */
+.compare-filters {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.compare-filters select {
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  border: 1px solid #222;
+  background: #181818;
+  color: #fff;
+}
+body.light-mode .compare-filters select {
+  background: #fff;
+  color: #222;
+}
+
 @media (max-width: 900px) {
   .compare-grid {
     grid-template-columns: 1fr 1fr;
-  }
-  .compare-section {
-    padding: 1rem;
   }
 }
 @media (max-width: 600px) {
@@ -191,4 +339,19 @@ footer {
   .compare-title {
     font-size: 1.5rem;
   }
+}
+
+/* Dynamic Web Effects */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0,112,201,0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(0,112,201,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,112,201,0); }
 }

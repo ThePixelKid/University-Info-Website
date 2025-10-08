@@ -7,63 +7,88 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">🎓 UniChoices</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="universities.html">Universities</a>
-      <a href="compare.html" class="active">Compare</a>
-    </nav>
-  </header>
+    <header class="navbar" aria-label="Main Navigation">
+      <div class="logo">🎓 UniChoices</div>
+      <nav>
+        <a href="index.html" aria-label="Home">Home</a>
+        <a href="universities.html" aria-label="Universities">Universities</a>
+        <a href="compare.html" class="active" aria-label="Compare">Compare</a>
+      </nav>
+      <button id="mode-toggle" aria-label="Toggle dark/light mode" style="margin-left:2rem;">🌙</button>
+    </header>
 
-  <section class="compare-section">
-    <h1 class="compare-title">Compare Universities</h1>
-    <div class="compare-grid">
-      <div class="compare-feature"></div>
-      <div class="compare-university">
-        <img src="https://www.kennesaw.edu/webstatic/_resources/images/template/ksu_horizontal.svg" alt="KSU" class="compare-logo" />
-        <h2>Kennesaw State</h2>
+    <section class="compare-section fade-transition">
+      <h1 class="compare-title">Compare Universities</h1>
+      <div class="compare-filters">
+        <label for="uni-filter">Universities:</label>
+        <select id="uni-filter" multiple aria-label="Select universities to compare">
+          <option value="ksu" selected>Kennesaw State</option>
+          <option value="gsu" selected>Georgia State</option>
+          <option value="gt" selected>Georgia Tech</option>
+        </select>
+        <label for="stat-filter">Statistic:</label>
+        <select id="stat-filter" aria-label="Select statistic to compare">
+          <option value="all" selected>All</option>
+          <option value="enrollment">Enrollment</option>
+          <option value="tuition-in">In-State Tuition</option>
+          <option value="tuition-out">Out-of-State Tuition</option>
+          <option value="acceptance">Acceptance Rate</option>
+          <option value="location">Campus Location</option>
+        </select>
       </div>
-      <div class="compare-university">
-        <img src="data:image/png;base64,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" />
-        <h2>Georgia State</h2>
+      <div class="compare-grid" id="compare-grid">
+        <div class="compare-feature"></div>
+        <div class="compare-university" data-tooltip="Kennesaw State University" aria-label="Kennesaw State">
+          <a href="https://www.kennesaw.edu/" target="_blank" aria-label="Kennesaw State Official Site">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Kennesaw_State_University_seal.png" alt="KSU" class="compare-logo" />
+          </a>
+          <h2>Kennesaw State</h2>
+        </div>
+        <div class="compare-university" data-tooltip="Georgia State University" aria-label="Georgia State">
+          <a href="https://www.gsu.edu/" target="_blank" aria-label="Georgia State Official Site">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Georgia_State_University_seal.png" alt="GSU" class="compare-logo" />
+          </a>
+          <h2>Georgia State</h2>
+        </div>
+        <div class="compare-university" data-tooltip="Georgia Tech" aria-label="Georgia Tech">
+          <a href="https://www.gatech.edu/" target="_blank" aria-label="Georgia Tech Official Site">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Georgia_Tech_seal.png" alt="GT" class="compare-logo" />
+          </a>
+          <h2>Georgia Tech</h2>
+        </div>
+        <!-- Features -->
+        <div class="compare-feature" data-tooltip="Total student enrollment">Enrollment</div>
+        <div class="compare-value animated-counter" data-value="47845">~47,845</div>
+        <div class="compare-value animated-counter" data-value="52000">~52,000</div>
+        <div class="compare-value animated-counter" data-value="43000">~43,000</div>
+        <div class="compare-feature" data-tooltip="Annual in-state tuition">In-State Tuition</div>
+        <div class="compare-value" data-value="7548">$7,548</div>
+        <div class="compare-value" data-value="12500">$12,500</div>
+        <div class="compare-value best-value" data-value="10512">$10,512</div>
+        <div class="compare-feature" data-tooltip="Annual out-of-state tuition">Out-of-State Tuition</div>
+        <div class="compare-value best-value" data-value="21616">$21,616</div>
+        <div class="compare-value" data-value="33320">$33,320</div>
+        <div class="compare-value" data-value="33596">$33,596</div>
+        <div class="compare-feature" data-tooltip="Percentage of applicants admitted">Acceptance Rate</div>
+        <div class="compare-value" data-value="0">N/A</div>
+        <div class="compare-value" data-value="0">N/A</div>
+        <div class="compare-value best-value" data-value="15">12–15%</div>
+        <div class="compare-feature" data-tooltip="Campus location(s)">Campus Location</div>
+        <div class="compare-value" data-value="kennesaw">Kennesaw & Marietta</div>
+        <div class="compare-value best-value" data-value="atlanta">Atlanta</div>
+        <div class="compare-value best-value" data-value="atlanta">Atlanta</div>
       </div>
-      <div class="compare-university">
-        <img src="https://www.gatech.edu/themes/custom/gatech/images/gatech-color_logo.png" alt="GT" class="compare-logo" />
-        <h2>Georgia Tech</h2>
+      <div class="compare-links">
+        <a href="kennesaw.html" class="btn">Kennesaw State Details</a>
+        <a href="gsu.html" class="btn">Georgia State Details</a>
+        <a href="gatech.html" class="btn">Georgia Tech Details</a>
       </div>
-      <!-- Features -->
-      <div class="compare-feature">Enrollment</div>
-      <div class="compare-value">~47,845</div>
-      <div class="compare-value">~52,000</div>
-      <div class="compare-value">~43,000</div>
-      <div class="compare-feature">In-State Tuition</div>
-      <div class="compare-value">$7,548</div>
-      <div class="compare-value">$12,500</div>
-      <div class="compare-value">$10,512</div>
-      <div class="compare-feature">Out-of-State Tuition</div>
-      <div class="compare-value">$21,616</div>
-      <div class="compare-value">$33,320</div>
-      <div class="compare-value">$33,596</div>
-      <div class="compare-feature">Acceptance Rate</div>
-      <div class="compare-value">N/A</div>
-      <div class="compare-value">N/A</div>
-      <div class="compare-value">12–15%</div>
-      <div class="compare-feature">Campus Location</div>
-      <div class="compare-value">Kennesaw & Marietta</div>
-      <div class="compare-value">Atlanta</div>
-      <div class="compare-value">Atlanta</div>
-    </div>
-    <div class="compare-links">
-      <a href="kennesaw.html" class="btn">Kennesaw State Details</a>
-      <a href="gsu.html" class="btn">Georgia State Details</a>
-      <a href="gatech.html" class="btn">Georgia Tech Details</a>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    <p>© 2025 My University Choices</p>
-  </footer>
-</body>
+    <footer>
+      <p>© 2025 My University Choices</p>
+    </footer>
+    <script src="compare.js"></script>
+  </body>
 </html>
 
