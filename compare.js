@@ -26,38 +26,35 @@ document.addEventListener('DOMContentLoaded', function () {
     update();
   });
 
-  // Comparison Filters
+  // Comparison Filters (improved logic)
   const uniFilter = document.getElementById('uni-filter');
   const statFilter = document.getElementById('stat-filter');
   const grid = document.getElementById('compare-grid');
   function filterGrid() {
     const selectedUnis = Array.from(uniFilter.selectedOptions).map(o => o.value);
     const selectedStat = statFilter.value;
-    // Hide/show university columns
+    // Show/hide university columns
     grid.querySelectorAll('.compare-university').forEach((el, i) => {
-      el.style.display = selectedUnis[i] ? '' : 'none';
+      el.style.display = selectedUnis.includes(['ksu','gsu','gt'][i]) ? '' : 'none';
     });
-    // Hide/show stat rows
+    // Show/hide stat rows and corresponding values
+    let statIndex = 0;
     grid.querySelectorAll('.compare-feature').forEach((el, i) => {
-      if (selectedStat === 'all' || el.textContent.replace(/\s/g,'').toLowerCase().includes(selectedStat.replace(/-/g,''))) {
-        el.style.display = '';
-        // Show corresponding values
-        for (let j = 1; j <= 3; j++) {
-          const valueEl = grid.children[grid.children.length - (grid.children.length - i*4 - j)];
-          if (valueEl && valueEl.classList.contains('compare-value')) {
-            valueEl.style.display = '';
-          }
-        }
-      } else {
-        el.style.display = 'none';
-        // Hide corresponding values
-        for (let j = 1; j <= 3; j++) {
-          const valueEl = grid.children[grid.children.length - (grid.children.length - i*4 - j)];
-          if (valueEl && valueEl.classList.contains('compare-value')) {
-            valueEl.style.display = 'none';
-          }
+      const statName = el.textContent.replace(/\s/g,'').toLowerCase();
+      const showStat = selectedStat === 'all' || statName.includes(selectedStat.replace(/-/g,''));
+      el.style.display = showStat ? '' : 'none';
+      // Show/hide corresponding values
+      let valueEls = [];
+      let idx = el.nextElementSibling;
+      for (let j = 0; j < 3; j++) {
+        if (idx && idx.classList.contains('compare-value')) {
+          valueEls.push(idx);
+          idx = idx.nextElementSibling;
         }
       }
+      valueEls.forEach((valueEl, colIdx) => {
+        valueEl.style.display = showStat && selectedUnis.includes(['ksu','gsu','gt'][colIdx]) ? '' : 'none';
+      });
     });
   }
   uniFilter.addEventListener('change', filterGrid);
